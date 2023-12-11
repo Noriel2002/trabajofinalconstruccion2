@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+  }
+
+  #wrapper .sidebar-brand-text {
+    color: #ff00ff; /* Cambia el color según tus preferencias */
+    font-size: 1.5rem; /* Ajusta el tamaño de la fuente según tus preferencias */
+    font-weight: bold; /* Hace que el texto sea más audaz */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    letter-spacing: 2px; /* Ajusta el espaciado entre letras */
+    margin-bottom: 0; /* Elimina el margen inferior por defecto */
+  }
+  .sticky-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff; /* Cambia el color según tus preferencias */
+    padding: 10px;
+    text-align: center;
+  }
+  
+  #content-wrapper {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .presentation {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+  }
+  
+  .presentation p {
+    color: #333333;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
