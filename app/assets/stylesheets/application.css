@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
+    background-color: #89d2ea;
   }
 
   #wrapper .sidebar-brand-text {
@@ -26,31 +26,54 @@ body {
     padding: 20px;
   }
   
-  .presentation {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px 0;
-  }
+ /* Estilos para la barra de navegación */
+.navbar {
+  background-color: #f0ae5e; /* Cambia el color según tus preferencias */
+  border: 1px solid #d9e7eb;; /* Añade un borde según tus preferencias */
+  text-align: center;
+}
+
+.nav-link {
+  color: #f8f5f4; /* Cambia el color del texto según tus preferencias */
   
-  .presentation p {
-    color: #333333;
-    font-size: 16px;
-    line-height: 1.5;
-  }
+}
+.nav-link:hover {
+  color: #060606; /* Color del texto al pasar el mouse por encima */
+}
+
+/* Estilos para el título (h2) */
+h2 {
+  color: #1387ed; /* Cambia el color del texto según tus preferencias */
+  background-color: #d9e7eb; /* Cambia el color de fondo según tus preferencias */
+  padding: 10px; /* Añade espacio alrededor del texto según tus preferencias */
+  border: 1px solid #091116; /* Añade un borde según tus preferencias */
+  border-radius: 8px; /* Añade esquinas redondeadas según tus preferencias */
+  margin: 20px 0; /* Ajusta el margen superior e inferior según tus preferencias */
+  text-align: center;
+}
+h3{
+  color: #1387ed; /* Cambia el color del texto según tus preferencias */
+  background-color:#d9e7eb; /* Cambia el color de fondo según tus preferencias */
+  padding: 10px; /* Añade espacio alrededor del texto según tus preferencias */
+  border: 1px solid #f1f3f3; /* Añade un borde según tus preferencias */
+  border-radius: 8px; /* Añade esquinas redondeadas según tus preferencias */
+  margin: 20px 0; /* Ajusta el margen superior e inferior según tus preferencias */
+  text-align: center;
+}
+
+h4{
+  color: #151514; /* Cambia el color del texto según tus preferencias */
+  background-color:#b6dbf1; /* Cambia el color de fondo según tus preferencias */
+  padding: 10px; /* Añade espacio alrededor del texto según tus preferencias */
+  border: 1px solid #f1f3f3; /* Añade un borde según tus preferencias */
+  border-radius: 8px; /* Añade esquinas redondeadas según tus preferencias */
+  margin: 20px 0; /* Ajusta el margen superior e inferior según tus preferencias */
+  text-align: center;
+}
+
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
  *= require_tree .
  *= require_self
+ *= require devise
  */
+

@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module MiProyectoRuby
   class Application < Rails::Application
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
     config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
