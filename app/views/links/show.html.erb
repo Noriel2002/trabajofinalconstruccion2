@@ -1,0 +1,10 @@
+<h1><%= @link.name %></h1>
+<p>URL: <%= @link.url %></p>
+
+<% if @link.expiration_date.present? %>
+  <p>Fecha de expiración: <%= @link.expiration_date %></p>
+<% end %>
+
+<% if @link.private? %>
+  <p>Este es un enlace privado.</p>
+<% end %>

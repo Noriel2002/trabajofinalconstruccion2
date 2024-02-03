@@ -1,0 +1,13 @@
+rails console 
+
+User.all
+
+Link.all
+
+user = User.find(1)  # Reemplaza 1 con el ID del usuario
+user.links
+
+<%= link_to 'Mostrar', link_path(link), class: 'btn btn-primary btn-sm' %>
+          <%= link_to 'Editar', edit_link_path(link), class: 'btn btn-secondary btn-sm' %>
+          <%= button_to 'Eliminar', link_path(link), method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger btn-sm' %>
+       

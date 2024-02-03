@@ -1,0 +1,38 @@
+<h2>Mis Links Cortos</h2>
+<%= link_to 'Crear un nuevo link', new_links_link_path, class: 'btn btn-primary mb-3' %>
+
+<% if current_user.links.any? %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>URL Única</th>
+      <th>Tipo</th>
+      <th>Contraseña Priv</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= notice %>
+    <%= alert %>
+
+    <% current_user.links.each do |link| %>
+      <tr>
+        <td><%= link.name %></td>
+        <td><%= link.url %></td>
+        <td><%= link.link_type %></td>
+          <td><%= link.password %></td>
+        <td>
+          <%= link_to 'Editar', edit_links_link_path(link), class: 'btn btn-secondary btn-sm' %> 
+          <%= button_to 'Eliminar', links_link_path(link), method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger btn-sm' %>
+            
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% else %>
+  <p>No tienes ningún enlace corto creado todavía.</p>
+<% end %>

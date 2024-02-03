@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <%= notice %>
+  <%= alert %>
+
+<%= form_with(model:  @link, url: links_links_path) do |form| %>
+
+ <h2>Crear Link </h2>
+
+  <% if @link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@link.errors.count, "error") %> prohibited this link from being saved:</h2>
+
+      <ul>
+        <% @link.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, 'Nombre (opcional):'%>
+    <%= form.text_field :name, placeholder: 'Ej: Carla'%>
+  </div>
+
+  <div class="field">
+    <%= form.label :url, 'URL larga:'  %>
+    <%= form.text_area :url, placeholder: 'Ej: https://www.super-long-link.com', required: true,  pattern: "https?://.+" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :link_type, 'Tipo de Link' %>
+    <%= form.select :link_type, [['Link regular', 'regular'], ['Link temporal', 'temporary'], ['Link privado', 'private'], ['Link efímero', 'ephemeral']], class: 'form-control' %>
+  </div>
+
+   <!-- Agregar campos adicionales según el tipo de enlace -->
+  <div id="password_field" class="field">
+    <%= form.label :password, "Contraseña de Link Privado" %>
+    <%= form.password_field :password%>
+  </div>
+
+  <div id="expiration_date_field" class="field">
+    <%= form.label :expiration_date, "Fecha y Hora de expiracion de Link Temporal" %>
+    <%= form.datetime_field :expiration_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Crear Link"%>
+  </div>
+<% end %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const linkTypeField = document.getElementById('link_type');
+  const passwordField = document.getElementById('password_field');
+  const expirationDateField = document.getElementById('expiration_date_field');
+
+  if (linkTypeField) {
+    linkTypeField.addEventListener('change', function() {
+      const selectedType = linkTypeField.value;
+
+      if (selectedType === 'private') {
+        passwordField.style.display = 'block';
+        expirationDateField.style.display = 'none';
+      } else if (selectedType === 'temporal') {
+        passwordField.style.display = 'none';
+        expirationDateField.style.display = 'block';
+      } else {
+        passwordField.style.display = 'none';
+        expirationDateField.style.display = 'none';
+      }
+    });
+  }
+});
+
+  </script>
+</body>
+</html>

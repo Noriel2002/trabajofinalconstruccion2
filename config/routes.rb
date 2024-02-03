@@ -10,5 +10,15 @@ Rails.application.routes.draw do
   
   end
 
+   namespace :links do
+    resources :links
+  end
+
+  resources :users do
+    resources :links, only: [:index] # Esta línea define una ruta para mostrar los enlaces del usuario
+  end
+  
+  get '/l/:slug', to: 'links#access_link'
+  
   root 'main#home'
 end
