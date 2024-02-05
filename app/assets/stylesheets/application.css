@@ -1,7 +1,7 @@
 body {
     margin: 0;
-    font-family: 'Arial', sans-serif;
     background-color: #b1deed;
+    font-family:'Lato', sans-serif;
   }
 
   #wrapper .sidebar-brand-text {
@@ -23,7 +23,7 @@ body {
   
   #content-wrapper {
     text-align: center;
-    padding: 20px;
+    padding: 10px;
   }
   
  /* Estilos para la barra de navegación */
@@ -34,9 +34,27 @@ body {
 }
 
 .nav-link {
-  color: #f8f5f4;
-  
+  color: #1387ed; 
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  font: inherit !important;
+  text-decoration: underline !important;
 }
+.divider {
+  margin: 0 10px; /* Espacio entre los enlaces */
+}
+.navbar-links {
+  display: flex; 
+  justify-content: center; /* Centra los elementos horizontalmente */
+  padding: 0; /* Elimina el relleno predeterminado */
+  margin-top: 10px;
+}
+
+.navbar-links > * {
+  margin: 0 10px; /* Agrega espacio entre los elementos */
+}
+
 .nav-link:hover {
   color: #060606;
 }
@@ -63,7 +81,7 @@ h3{
 
 h4{
   color: #151514; 
-  background-color:#b6dbf1; 
+  background-color:#a0ccda; 
   padding: 10px; 
   border: 1px solid #f1f3f3;
   border-radius: 8px;
