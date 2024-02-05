@@ -7,13 +7,16 @@
   <thead>
     <tr>
       <th>Nombre</th>
-      <th>URL Única</th>
+      <th>URL Larga</th>
+      <th>URL Corta</th>
       <th>Tipo</th>
-      <th>Contraseña Priv</th>
+      <th>Otros</th>
       <th>Acciones</th>
+       <th>Reportes</th>
     </tr>
   </thead>
   <tbody>
+
     <%= notice %>
     <%= alert %>
 
@@ -21,13 +24,25 @@
       <tr>
         <td><%= link.name %></td>
         <td><%= link.url %></td>
+        <td><%= link_to link.url_short,access_link_path(slug: link.slug) %>
+        </td>
         <td><%= link.link_type %></td>
-          <td><%= link.password %></td>
+        <td> <% if link.link_type == 'private' %> 
+               <p>Contraseña: <%= link.password %></p>
+             <% elsif link.link_type == 'temporary' %> 
+               <p>Fecha de Expiracion: <%= link.expiration_date %></p>
+             <% else %> 
+               <p> -- </p>
+             <% end %>   
+        </td>
         <td>
           <%= link_to 'Editar', edit_links_link_path(link), class: 'btn btn-secondary btn-sm' %> 
-          <%= button_to 'Eliminar', links_link_path(link), method: :delete, data: { confirm: '¿Estás seguro?' }, class: 'btn btn-danger btn-sm' %>
-            
+          <%= button_to 'Eliminar', links_link_path(link), method: :delete, class: 'btn btn-danger btn-sm' %>
         </td>
+       <th>
+          <%= link_to 'Detalles de Acceso', access_details_links_path(slug: link.slug), class: 'btn btn-primary' %>
+          <%= link_to 'Cantidad de Accesos por Día', access_count_by_day_links_path(slug: link.slug), class: 'btn btn-primary' %>
+       </th>
       </tr>
     <% end %>
   </tbody>

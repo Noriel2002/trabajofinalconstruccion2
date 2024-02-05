@@ -1,0 +1,47 @@
+/* Estilos para el formulario */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #f4f0ef;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Estilos para los campos del formulario */
+  .field {
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos para el botón de submit */
+  .actions {
+    text-align: center;
+  }
+  
+  /* Estilos para los mensajes de error */
+  #error_explanation {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  #error_explanation ul {
+    list-style-type: none;
+  }
+  
+  table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 100px;
+  }
+  th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  

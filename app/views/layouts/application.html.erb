@@ -6,10 +6,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!-- Tus scripts -->
-    <%= javascript_importmap_tags %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -22,8 +18,15 @@
   
   <h2>Bienvenido</h2>
 
-  <%= notice %>
-  <%= alert %>
+
+<link rel="stylesheet" type="text/css" href="/assets/form_styles.css">
+<link rel="stylesheet" type="text/css" href="/assets/application.css">
+
+<% flash.each do |type, message| %>
+  <div class="<%= type %>">
+    <%= message %>
+  </div>
+<% end %>
 
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">

@@ -1,6 +1,8 @@
 class Links::LinksController < ApplicationController
     before_action :authenticate_user!
     before_action :set_link, only: [:show, :edit, :update, :destroy]
+    before_action :find_link, only: [:access_link, :authenticate_private_link]
+
   
     def index
       @links = current_user.links
@@ -66,31 +68,86 @@ class Links::LinksController < ApplicationController
 
     def access_link
       @link = Link.find_by(slug: params[:slug])
-      return render_404 unless @link
-  
-      if @link.regular? || @link.temporary?
-        # Registrar acceso al enlace
+      unless @link
+        flash[:alert] = "El enlace no existe."
+        redirect_to root_path
+      end
+
+      if @link.regular?
         @link.register_access(request.remote_ip)
-        # Redirigir al usuario a la URL de destino
-        redirect_to @link.url
+        render 'links/show'
       elsif @link.private?
-        # Si el enlace es privado, mostrar página de solicitud de clave
-        render 'links/private_access'
+        render 'links/private_access', locals: { link: @link } 
       elsif @link.ephemeral?
-        # Si el enlace es efímero, devolver código 403 Forbidden
-        render plain: "Acceso prohibido", status: :forbidden
+        if @link.used
+          render_error(:forbidden)
+        else
+          @link.register_access(request.remote_ip)
+          @link.update(used: true)
+          render 'links/show'
+        end
+      elsif @link.temporary?
+        if not @link.expiration_date < Time.now
+        @link.register_access(request.remote_ip)
+        render 'links/show'
+        else
+          render_error(status :not_found)
+        end
+      else
+        flash[:alert] = "Hubo un error al acceder al enlace."
+        redirect_to root_path
       end
     end
   
-    private
-  
-    # Método para manejar solicitudes de enlaces que no existen
-    def render_404
-      render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found
+    def authenticate_private_link
+      @link = Link.find_by(slug: params[:slug])
+      
+      if @link.private? && params[:password] == @link.password
+          @link.register_access(request.remote_ip)
+          render 'links/show'
+      else
+        flash[:alert] = 'La contraseña es incorrecta. Ya no puede acceder al link privado.'
+        redirect_to root_path
+      end
+    end    
+    
+    # para los reportes
+    def access_details
+      @link = Link.find_by(slug: params[:slug])
+      @access_details = @link.access_details
+      render 'links/access_details'
     end
+  
+    def access_count_by_day
+      @link = Link.find_by(slug: params[:slug])
+      @access_count_by_day = @link.access_count_by_day
+      render 'links/access_count_by_day'
+    end
+
+    private
+
+    def render_error(status)
+      if status == :not_found
+        render 'links/access_link', status: :not_found
+      elsif status == :forbidden
+        render 'links/forbidden', status: :forbidden
+      else
+        # Renderizar una vista de error genérica
+        render 'error', status: status
+      end
+    end
+    
 
     def set_link
       @link = current_user.links.find(params[:id])
+    end
+ 
+    def find_link
+      @link = Link.find_by(slug: params[:slug])
+      unless @link
+        flash[:alert] = "El enlace no existe."
+        redirect_to root_path
+      end
     end
      
 end

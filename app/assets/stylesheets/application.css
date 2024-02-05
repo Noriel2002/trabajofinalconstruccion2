@@ -1,22 +1,22 @@
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #89d2ea;
+    background-color: #b1deed;
   }
 
   #wrapper .sidebar-brand-text {
-    color: #ff00ff; /* Cambia el color según tus preferencias */
-    font-size: 1.5rem; /* Ajusta el tamaño de la fuente según tus preferencias */
-    font-weight: bold; /* Hace que el texto sea más audaz */
-    text-transform: uppercase; /* Convierte el texto a mayúsculas */
-    letter-spacing: 2px; /* Ajusta el espaciado entre letras */
-    margin-bottom: 0; /* Elimina el margen inferior por defecto */
+    color: #ff00ff;
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    margin-bottom: 0; 
   }
   .sticky-footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: #ffffff; /* Cambia el color según tus preferencias */
+    background-color: #ffffff; 
     padding: 10px;
     text-align: center;
   }
@@ -28,47 +28,60 @@ body {
   
  /* Estilos para la barra de navegación */
 .navbar {
-  background-color: #f0ae5e; /* Cambia el color según tus preferencias */
-  border: 1px solid #d9e7eb;; /* Añade un borde según tus preferencias */
+  background-color: #f0ae5e; 
+  border: 1px solid #d9e7eb;; 
   text-align: center;
 }
 
 .nav-link {
-  color: #f8f5f4; /* Cambia el color del texto según tus preferencias */
+  color: #f8f5f4;
   
 }
 .nav-link:hover {
-  color: #060606; /* Color del texto al pasar el mouse por encima */
+  color: #060606;
 }
 
 /* Estilos para el título (h2) */
 h2 {
-  color: #1387ed; /* Cambia el color del texto según tus preferencias */
-  background-color: #d9e7eb; /* Cambia el color de fondo según tus preferencias */
-  padding: 10px; /* Añade espacio alrededor del texto según tus preferencias */
-  border: 1px solid #091116; /* Añade un borde según tus preferencias */
-  border-radius: 8px; /* Añade esquinas redondeadas según tus preferencias */
-  margin: 20px 0; /* Ajusta el margen superior e inferior según tus preferencias */
+  color: #1387ed; 
+  background-color: #d9e7eb; 
+  padding: 10px; 
+  border: 1px solid #091116; 
+  border-radius: 8px;
+  margin: 20px 0;
   text-align: center;
 }
 h3{
-  color: #1387ed; /* Cambia el color del texto según tus preferencias */
-  background-color:#d9e7eb; /* Cambia el color de fondo según tus preferencias */
-  padding: 10px; /* Añade espacio alrededor del texto según tus preferencias */
-  border: 1px solid #f1f3f3; /* Añade un borde según tus preferencias */
-  border-radius: 8px; /* Añade esquinas redondeadas según tus preferencias */
-  margin: 20px 0; /* Ajusta el margen superior e inferior según tus preferencias */
+  color: #1387ed; 
+  background-color:#d9e7eb;
+  padding: 10px; 
+  border: 1px solid #f1f3f3; 
+  border-radius: 8px; 
+  margin: 20px 0; 
   text-align: center;
 }
 
 h4{
-  color: #151514; /* Cambia el color del texto según tus preferencias */
-  background-color:#b6dbf1; /* Cambia el color de fondo según tus preferencias */
-  padding: 10px; /* Añade espacio alrededor del texto según tus preferencias */
-  border: 1px solid #f1f3f3; /* Añade un borde según tus preferencias */
-  border-radius: 8px; /* Añade esquinas redondeadas según tus preferencias */
-  margin: 20px 0; /* Ajusta el margen superior e inferior según tus preferencias */
+  color: #151514; 
+  background-color:#b6dbf1; 
+  padding: 10px; 
+  border: 1px solid #f1f3f3;
+  border-radius: 8px;
+  margin: 20px 0; 
   text-align: center;
+}
+.alert {
+  background-color: #f44336;
+  color: white;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.notice {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  margin-bottom: 15px;
 }
 
 /*

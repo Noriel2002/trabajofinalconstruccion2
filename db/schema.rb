@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_03_182431) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_04_191634) do
+  create_table "accesses", force: :cascade do |t|
+    t.string "ip_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "link_id", null: false
+    t.index ["link_id"], name: "index_accesses_on_link_id"
+  end
+
   create_table "links", force: :cascade do |t|
     t.string "slug"
     t.string "name"
@@ -22,6 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_03_182431) do
     t.datetime "expiration_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "used"
     t.index ["slug"], name: "index_links_on_slug", unique: true
     t.index ["user_id"], name: "index_links_on_user_id"
   end
@@ -38,5 +47,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_03_182431) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "accesses", "links"
   add_foreign_key "links", "users"
 end

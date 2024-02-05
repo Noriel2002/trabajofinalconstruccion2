@@ -1,10 +1,19 @@
-<h1><%= @link.name %></h1>
-<p>URL: <%= @link.url %></p>
-
-<% if @link.expiration_date.present? %>
-  <p>Fecha de expiración: <%= @link.expiration_date %></p>
-<% end %>
+<h2>Nombre del Link: <%= @link.name %></h2>
+<h2>URL Original: <%= @link.url %></h2>
 
 <% if @link.private? %>
-  <p>Este es un enlace privado.</p>
+  <h2>Este es un enlace privado.</h2>
+<% end %>
+
+<% if @link.temporary? %>
+    <h2>¡Todavia no expiró!</h2>
+   <h2>Fecha de expiración: <%= @link.expiration_date %></h2>
+<% end %>
+
+<% if @link.regular? %>
+  <h2>Este es un enlace regular.</h2>
+<% end %>
+
+<% if @link.ephemeral? %>
+  <h2>Este es un enlace efimero.</h2>
 <% end %>

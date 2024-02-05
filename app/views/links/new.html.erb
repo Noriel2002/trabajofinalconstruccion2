@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <%= notice %>
-  <%= alert %>
+
+<link rel="stylesheet" type="text/css" href="/assets/form_styles.css">
+<link rel="stylesheet" type="text/css" href="/assets/application.css">
+
+<% flash.each do |type, message| %>
+  <div class="<%= type %>">
+    <%= message %>
+  </div>
+<% end %>
 
 <%= form_with(model:  @link, url: links_links_path) do |form| %>
 

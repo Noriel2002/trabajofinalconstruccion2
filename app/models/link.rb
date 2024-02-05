@@ -1,6 +1,8 @@
 class Link < ApplicationRecord
     self.inheritance_column = :_disabled
 
+    has_many :accesses, dependent: :destroy # accesos 
+
     belongs_to :user
     before_create :generate_slug, :generate_unique_url
   
@@ -31,7 +33,16 @@ class Link < ApplicationRecord
     def private?
       link_type == 'private'
     end
-  
+    
+    def ephemeral?
+      link_type == 'ephemeral'
+    end
+
+    def regular?
+      link_type == 'regular'
+    end
+
+    # creo q no lo uso 
     def expiration_date_cannot_be_in_the_past
       errors.add(:expiration_date, "can't be in the past") if expiration_date.present? && expiration_date < Date.today
     end
@@ -43,6 +54,19 @@ class Link < ApplicationRecord
       uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
     rescue URI::InvalidURIError
       false
+    end
+
+    def register_access(ip_address)
+      accesses.create(ip_address: ip_address)
+    end
+
+    # para los reportes
+    def access_details
+      Access.where(link_id: id)
+    end
+  
+    def access_count_by_day
+      Access.where(link_id: id).group("DATE(created_at)").count
     end
 end
   

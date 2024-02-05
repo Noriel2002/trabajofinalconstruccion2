@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cantidad de Accesos por Día</title>
+</head>
+<body>
+
+<link rel="stylesheet" type="text/css" href="/assets/form_styles.css">
+
+  <h1>Cantidad de Accesos por Día</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Día</th>
+        <th>Cantidad de Accesos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @access_count_by_day.each do |day, count| %>
+        <tr>
+          <td><%= day %></td>
+          <td><%= count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</body>
+</html>

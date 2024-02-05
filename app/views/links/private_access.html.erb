@@ -1,0 +1,15 @@
+<h2>Ingrese la contraseña para acceder al link privado:</h2>
+
+<%= form_with(url: authenticate_private_link_path, method: :post) do |form| %>
+  <%= form.hidden_field :slug, value: @link.slug %>
+  <div class="field">
+    <%= form.label :password, "Contraseña de Link Privado" %>
+    <%= form.password_field :password %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Acceder al enlace privado" %>
+  </div>
+<% end %>
+
+<link rel="stylesheet" type="text/css" href="/assets/form_styles.css">
+<link rel="stylesheet" type="text/css" href="/assets/application.css">
