@@ -4,21 +4,13 @@
   <%= notice %>
   <%= alert %>
 
+<link rel="stylesheet" type="text/css" href="/assets/form_styles.css">
+<link rel="stylesheet" type="text/css" href="/assets/application.css">
+
 <%= form_with(model:  @link, url: links_link_path) do |form| %>
 
  <h2>Editar Link </h2>
 
-  <% if @link.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@link.errors.count, "error") %> prohibited this link from being saved:</h2>
-
-      <ul>
-        <% @link.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="field">
     <%= form.label :name, 'Nombre (opcional):'%>
@@ -49,32 +41,8 @@
   <div class="actions">
     <%= form.submit "Editar Link"%>
   </div>
+
 <% end %>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-  const linkTypeField = document.getElementById('link_type');
-  const passwordField = document.getElementById('password_field');
-  const expirationDateField = document.getElementById('expiration_date_field');
-
-  if (linkTypeField) {
-    linkTypeField.addEventListener('change', function() {
-      const selectedType = linkTypeField.value;
-
-      if (selectedType === 'private') {
-        passwordField.style.display = 'block';
-        expirationDateField.style.display = 'none';
-      } else if (selectedType === 'temporal') {
-        passwordField.style.display = 'none';
-        expirationDateField.style.display = 'block';
-      } else {
-        passwordField.style.display = 'none';
-        expirationDateField.style.display = 'none';
-      }
-    });
-  }
-});
-
-  </script>
 </body>
 </html>

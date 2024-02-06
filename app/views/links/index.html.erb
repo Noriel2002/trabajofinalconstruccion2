@@ -17,9 +17,6 @@
   </thead>
   <tbody>
 
-    <%= notice %>
-    <%= alert %>
-
     <% current_user.links.each do |link| %>
       <tr>
         <td><%= link.name %></td>
@@ -49,7 +46,7 @@
 </table>
 
 <% else %>
-  <p>No tienes ningún enlace corto creado todavía.</p>
+  <h4>No tienes ningún enlace corto creado todavía.</h4>
 <% end %>
 <br>
 <br>

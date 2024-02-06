@@ -1,11 +1,10 @@
 class Users::RegistrationsController < Devise::RegistrationsController
     before_action :configure_permitted_parameters
-    def create
-        super do |resource|
-        flash[:notice] = "¡Bienvenido, #{resource.email}!"
-        end
-    end
     
+    def create
+        super
+    end    
+
     def delete_account
         if current_user
             current_user.destroy # elimina cuenta del usuario actual

@@ -7,7 +7,30 @@
 
 <link rel="stylesheet" type="text/css" href="/assets/form_styles.css">
 
+
   <h3>Detalles de Acceso</h3>
+  <!-- Formulario de búsqueda por IP -->
+  <%= form_tag(access_details_links_path, method: :get) do %>
+    <div>
+      <%= label_tag :ip_address, "Buscar por dirección IP:" %>
+      <%= text_field_tag :ip_address, params[:ip_address] %>
+    </div>
+    <%= submit_tag "Buscar" %>
+  <% end %>
+
+  <!-- Formulario de búsqueda por rango de fechas -->
+  <%= form_tag(access_details_links_path, method: :get) do %>
+    <div>
+      <%= label_tag :start_date, "Fecha de inicio:" %>
+      <%= date_field_tag :start_date, params[:start_date] %>
+    </div>
+    <div>
+      <%= label_tag :end_date, "Fecha de fin:" %>
+      <%= date_field_tag :end_date, params[:end_date] %>
+    </div>
+    <%= submit_tag "Buscar" %>
+  <% end %>
+
   <table>
     <thead>
       <tr>

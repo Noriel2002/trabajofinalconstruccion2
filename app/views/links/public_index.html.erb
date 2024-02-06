@@ -1,0 +1,37 @@
+<h2>Mis Links Cortos</h2>
+<% if @links.any? %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>URL Larga</th>
+      <th>URL Corta</th>
+      <th>Tipo</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% flash.each do |type, message| %>
+        <div class="<%= type %>">
+            <%= message %>
+        </div>
+    <% end %>
+
+    <% @links.each do |link| %>
+      <tr>
+        <td><%= link.name %></td>
+        <td><%= link.url %></td>
+        <td><%= link_to link.url_short,access_link_path(slug: link.slug) %></td>
+        <td><%= link.link_type %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% else %>
+  <p>La lista de links esta vacia.</p>
+<% end %>
+<br>
+<br>
+<br>
