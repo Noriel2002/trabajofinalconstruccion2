@@ -3,11 +3,11 @@ Link.destroy_all
 Access.destroy_all
 
 # Crear algunos usuarios
-user1 = User.create(email: 'usuario1@example.com', password: 'password123')
-user2 = User.create(email: 'usuario2@example.com', password: 'password456')
+user1 = User.create(email: 'usuario1@example.com', password: 'password123', username: 'usuario1')
+user2 = User.create(email: 'usuario2@example.com', password: 'password456', username: 'usuario2')
 
 # Crear enlaces asociados a los usuarios
-# user1 con 3 links
+# user1 con 4 links
 link1 = user1.links.build(name: 'Enlace 1', url: 'https://example.com/link1', link_type: 'regular')
 link1.generate_slug
 link1.save
@@ -19,6 +19,10 @@ link2.save
 link3 = user1.links.build(name: 'Enlace 3', url: 'https://example.com/link3', link_type: 'ephemeral', expiration_date: Time.now + 1.week)
 link3.generate_slug
 link3.save
+
+link4 = user1.links.build(name: 'Enlace 4', url: 'https://example.com/link4', link_type: 'ephemeral', expiration_date: Time.now + 1.week)
+link4.generate_slug
+link4.save
 
 # Registrar accesos a través de los enlaces
 # 3 accesos para el link1

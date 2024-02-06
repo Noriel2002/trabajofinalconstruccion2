@@ -1,5 +1,5 @@
 class Links::LinksController < ApplicationController
-    before_action :authenticate_user!, except: [:public_index, :show, :access_link]
+    before_action :authenticate_user!, except: [:public_index, :show, :access_link, :update, :authenticate_private_link]
     before_action :set_link, only: [:show, :edit, :update, :destroy]
     before_action :find_link, only: [:access_link, :authenticate_private_link]
 
