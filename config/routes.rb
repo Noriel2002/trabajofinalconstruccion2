@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   
   post '/links/:slug/authenticate_private_link', to: 'links/links#authenticate_private_link', as: 'authenticate_private_link'
   
+  get 'l/:slug', to: 'links/links#access_link'
 
   root to: 'links/links#index'
 end

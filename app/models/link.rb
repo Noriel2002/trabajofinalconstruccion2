@@ -8,18 +8,14 @@ class Link < ApplicationRecord
   
     validates :slug, presence: true, uniqueness: true
     validates :link_type, inclusion: { in: %w[temporary private regular ephemeral] }
+    validate :valid_url?
     # Para enlaces temporales
     validates :expiration_date, presence: true, if: :temporary?
-    validate :expiration_date_cannot_be_in_the_past, if: :temporary?
     # Para enlaces privados
     validates :password, presence: true,  if: :private?
-    validates :url, format: { with: URI::regexp(%w[http https]), message: "debe ser una URL válida" }, allow_blank: true
-    validate :valid_url?
-
-   # private
-  
+   
     def generate_slug
-      self.slug = SecureRandom.hex(3)
+      self.slug = SecureRandom.hex(2)
      end
   
     def generate_unique_url
@@ -40,11 +36,6 @@ class Link < ApplicationRecord
 
     def regular?
       link_type == 'regular'
-    end
-
-    # creo q no lo uso 
-    def expiration_date_cannot_be_in_the_past
-      errors.add(:expiration_date, "can't be in the past") if expiration_date.present? && expiration_date < Date.today
     end
 
     def valid_url?
@@ -68,5 +59,11 @@ class Link < ApplicationRecord
     def access_count_by_day
       Access.where(link_id: id).group("DATE(created_at)").count
     end
+    
+    # intentos de accesos para link privado 
+    def failed_access_attempt!
+      update(access_attempted: true)
+    end
+  
 end
   
