@@ -14,12 +14,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_204631) do
     t.string "url_short"
     t.string "link_type"
     t.integer "user_id"
-    t.string "password"
-    t.datetime "expiration_date"
+    t.string "password" # link privado
+    t.datetime "expiration_date" # link temporal
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "used"
-    t.boolean "access_attempted"
+    t.boolean "used" # link efimero
+    t.boolean "access_attempted" # link privado
     t.index ["slug"], name: "index_links_on_slug", unique: true
     t.index ["user_id"], name: "index_links_on_user_id"
   end

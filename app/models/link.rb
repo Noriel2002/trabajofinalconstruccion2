@@ -41,7 +41,7 @@ class Link < ApplicationRecord
     def valid_url?
       return false if self.url.blank?
   
-      uri = URI.parse(self.url)
+      uri = URI.parse(self.url) # convierte una cadena en un objeto URI.
       uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
     rescue URI::InvalidURIError
       false

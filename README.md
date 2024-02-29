@@ -74,7 +74,7 @@ Para facilitar el desarrollo, se recomienda utilizar gemas establecidas que prop
     Haz push a la rama (git push origin feature/nueva-caracteristica).
     Abre un pull request.
 
-## Desiciones de Diseño y Arquitectura
+## Decisiones de Diseño y Arquitectura
 
    # Links
     - Para la resolución de los distintos tipos de Link decidí optar por tener un único Modelo y un único Controlador, ya que al ser 4 tipos de Link y solo dos tipos de Link tenían un solo dato extra me parecio mejor tener un único modelo donde agrego esos dos campos con la condicion de que esten presentes cuando se quiere crear/editar el link con ese campo. 
@@ -91,9 +91,9 @@ Para facilitar el desarrollo, se recomienda utilizar gemas establecidas que prop
    - Para el manejo de los Usuarios (Inicio de Sesion/Cierre de Sesion/Registro/Recuperacion de Cuenta/Eliminacion de CUenta) decidí usar la Gema Devise, el cual mediante comandos se generan las Vistas/Modelos/Controladores. Lo que hice fue agregarle al controlador el metodo "configure_permitted_parameters" para poder agregar un campo mas a mi Usuario, en este caso un username. 
 
    # Dominio
-   - Para el dominio decidi crear una variable en "config/locales/application.rb" : "DOMAIN = '127.0.0.1:3000'", el cual se ejecuta cuando creo la url corta de la siguiente manera: " self.url_short =  "#{MiProyectoRuby::Application::DOMAIN}/l/#{self.slug}" ", donde se pone el nombre del proyecto en primer lugar y luego el nombre del archivo donde esta declarado el dominio,y por ultimo el nombre de la variable. Asi es como todos los links que se crean tienen el dominio '127.0.0.1:3000'.
+   - Para el dominio decidi crear una variable en "config/application.rb" : "DOMAIN = '127.0.0.1:3000'", el cual se ejecuta cuando creo la url corta de la siguiente manera: " self.url_short =  "#{MiProyectoRuby::Application::DOMAIN}/l/#{self.slug}" ", donde se pone el nombre del modulo en primer lugar y luego el nombre de la clase donde esta declarado el dominio,y por ultimo el nombre de la variable. Asi es como todos los links que se crean tienen el dominio '127.0.0.1:3000'.
 
-      En caso de que en un futuro se cambie el dominio solo se deberá acceder al archivo application.rb y cambiar el nombre del dominio que se requiera para la situación.
+      En caso de que en un futuro se cambie el dominio solo se deberá acceder al archivo "config/application.rb" y cambiar el nombre del dominio que se requiera para la situación.
 
    # Reportes
    - Para los dos reportes que se pedian cree un Modelo Access con una relacion de depencidencia con la clase Link, con un unico campo de tipo stringllamado ip_address. En el controlador del link, cada vez que se accede exitosamente a un link (pasan las validaciones) se llama al metodo que se encuentra en el Modelo Link " register_access(ip_addres) " donde le paso la direccion IP del cliente que hizo la solicitud al servidor, de la siguiente forma: "link.register_access(request.remote_ip)", dentro del metodo de mi modelo Link donde hago  " register_access(ip_addres) " contiene una linea de codigo, donde hago un create de la clase access y le asingo a ip_address la direccion IP que recibe como parametro. 
