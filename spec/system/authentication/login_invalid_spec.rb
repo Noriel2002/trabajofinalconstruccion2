@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Login", type: :system do
   before do
-    driven_by(:selenium_chrome)
+    driven_by(:selenium_chrome_headless)
     User.destroy_all  # 💡 Borra todos los usuarios antes de la prueba
     User.create!(email: 'usuario1@example.com', password: 'password123', username: 'usuario1')
   end

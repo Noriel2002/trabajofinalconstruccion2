@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Acceso permitido con sesión iniciada", type: :system do
   before do
-    driven_by(:selenium_chrome)
+    driven_by(:selenium_chrome_headless)
 
     # Crear un usuario de prueba
     @user = User.create!(

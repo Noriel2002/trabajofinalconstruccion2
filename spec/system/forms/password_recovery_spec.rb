@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Recuperación de contraseña", type: :system do
   before do
-    driven_by(:selenium_chrome)
+    driven_by(:selenium_chrome_headless)
 
     # Crear un usuario de prueba con username
     @user = User.create!(

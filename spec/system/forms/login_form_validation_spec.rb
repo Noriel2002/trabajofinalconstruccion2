@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Validación de formulario de inicio de sesión", type: :system do
   before do
-    driven_by(:selenium_chrome)
+    driven_by(:selenium_chrome_headless)
 
     # Limpiar sesiones previas
     Capybara.reset_sessions!
