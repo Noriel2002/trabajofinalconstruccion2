@@ -76,7 +76,7 @@ jobs:
 
       - name: 🔧 Configurar base de datos
         run: |
-          cp config/database.yml.github config/database.yml
+          cp config/database.yml config/database.yml
           bin/rails db:create db:schema:load --trace
 
       - name: 🚀 Ejecutar pruebas de integración
