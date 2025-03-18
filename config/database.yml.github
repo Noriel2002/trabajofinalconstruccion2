@@ -3,9 +3,13 @@ default: &default
   encoding: unicode
   pool: 5
   username: postgres
-  password: "nori123"
+  password: "nori123"  # Ajusta con tu contraseña real
   host: localhost
+
+development:
+  <<: *default
+  database: dev_db  # Nombre de la base de datos para desarrollo
 
 test:
   <<: *default
-  database: test_db
+  database: test_db  # Nombre de la base de datos para pruebas
