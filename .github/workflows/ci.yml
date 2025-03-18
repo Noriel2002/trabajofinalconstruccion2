@@ -13,11 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:16
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          POSTGRES_PASSWORD: "nori123"  # Usa la misma contraseña en todos los jobs
           POSTGRES_DB: proyecto_ruby_2023_test
+          POSTGRES_HOST_AUTH_METHOD: trust  # Permite autenticación sin contraseña en CI
         ports:
           - 5432:5432
         options: >-
@@ -30,6 +31,9 @@ jobs:
       - name: 📥 Clonar repositorio
         uses: actions/checkout@v3
 
+      - name: 🛠️ Configurar variables de entorno
+        run: echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
+
       - name: 🛠️ Configurar Ruby y Bundler
         uses: ruby/setup-ruby@v1
         with:
@@ -37,8 +41,6 @@ jobs:
           bundler-cache: true
 
       - name: 🔧 Configurar base de datos
-        env:
-          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         run: |
           cp config/database.yml.github config/database.yml
           bin/rails db:create db:schema:load --trace
@@ -53,11 +55,12 @@ jobs:
 
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:16  # Usa la misma versión que en test_sistema
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: test_db
+          POSTGRES_PASSWORD: "nori123"  # Usa la misma contraseña en todos los jobs
+          POSTGRES_DB: proyecto_ruby_2023_test
+          POSTGRES_HOST_AUTH_METHOD: trust  # Permite autenticación sin contraseña
         ports:
           - 5432:5432
         options: >-
@@ -69,6 +72,9 @@ jobs:
     steps:
       - name: 📥 Clonar repositorio
         uses: actions/checkout@v3
+
+      - name: 🛠️ Configurar variables de entorno
+        run: echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
 
       - name: 🛠️ Configurar Ruby y Bundler
         uses: ruby/setup-ruby@v1
