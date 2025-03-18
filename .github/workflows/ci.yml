@@ -8,17 +8,56 @@ on:
   pull_request:
 
 jobs:
-  test_sistema:
-    name: Ejecutar pruebas de sistema (Capybara)
+  setup_postgres:
+    name: Configurar y conectar PostgreSQL
     runs-on: ubuntu-latest
     services:
       postgres:
         image: postgres:16
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: "nori123"  # Usa la misma contraseña en todos los jobs
+          POSTGRES_PASSWORD: "nori123"
           POSTGRES_DB: proyecto_ruby_2023_test
           POSTGRES_HOST_AUTH_METHOD: trust  # Permite autenticación sin contraseña en CI
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: 🛠️ Configurar variables de entorno
+        run: echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> $GITHUB_ENV
+
+      - name: 🛠️ Configurar Ruby y Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.2
+          bundler-cache: true
+
+      - name: 🔧 Configurar base de datos
+        run: |
+          cp config/database.yml.github config/database.yml
+          bin/rails db:create db:schema:load --trace
+
+  test_sistema:
+    name: Ejecutar pruebas de sistema (Capybara)
+    runs-on: ubuntu-latest
+    needs: setup_postgres  # Espera a que setup_postgres termine antes de iniciar
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: "nori123"
+          POSTGRES_DB: proyecto_ruby_2023_test
+          POSTGRES_HOST_AUTH_METHOD: trust
         ports:
           - 5432:5432
         options: >-
@@ -51,16 +90,16 @@ jobs:
   test_integracion:
     name: Ejecutar pruebas de integración
     runs-on: ubuntu-latest
-    needs: test_sistema  # 🔄 Espera a que test_sistema termine antes de iniciar
+    needs: test_sistema  # Espera a que test_sistema termine antes de iniciar
 
     services:
       postgres:
-        image: postgres:16  # Usa la misma versión que en test_sistema
+        image: postgres:16
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: "nori123"  # Usa la misma contraseña en todos los jobs
+          POSTGRES_PASSWORD: "nori123"
           POSTGRES_DB: proyecto_ruby_2023_test
-          POSTGRES_HOST_AUTH_METHOD: trust  # Permite autenticación sin contraseña
+          POSTGRES_HOST_AUTH_METHOD: trust
         ports:
           - 5432:5432
         options: >-
