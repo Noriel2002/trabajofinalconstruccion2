@@ -1,3 +1,12 @@
+name: CI - RSpec Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
 jobs:
   test_sistema:
     name: Ejecutar pruebas de sistema (Capybara)
@@ -24,7 +33,7 @@ jobs:
       - name: 🛠️ Configurar Ruby y Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.2  # Asegúrate de que coincide con tu Gemfile
+          ruby-version: 3.0.2
           bundler-cache: true
 
       - name: 🔧 Configurar base de datos
@@ -62,7 +71,7 @@ jobs:
       - name: 🛠️ Configurar Ruby y Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.0.2  # Asegúrate de que coincide con tu Gemfile
+          ruby-version: 3.0.2
           bundler-cache: true
 
       - name: 🔧 Configurar base de datos
