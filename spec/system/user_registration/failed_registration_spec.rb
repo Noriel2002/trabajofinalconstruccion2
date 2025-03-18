@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Registro de Usuario", type: :system do
   before do
-    driven_by(:selenium_chrome)
+    driven_by(:selenium_chrome_headless)
 
     # Limpiar usuarios antes de cada prueba
     User.destroy_all
