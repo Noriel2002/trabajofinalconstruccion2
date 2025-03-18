@@ -1,15 +1,21 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: postgres
-  password: "nori123"  # Ajusta con tu contraseña real
-  host: localhost
+  password: <%= ENV['DATABASE_PASSWORD'] %>  # Usa variables de entorno en todos los entornos
+  host: localhost  # GitHub Actions usa 'localhost' cuando PostgreSQL se ejecuta en un servicio
 
 development:
   <<: *default
-  database: dev_db  # Nombre de la base de datos para desarrollo
+  database: proyecto_ruby_2023_development
 
 test:
   <<: *default
-  database: test_db  # Nombre de la base de datos para pruebas
+  database: proyecto_ruby_2023_test
+
+production:
+  <<: *default
+  database: proyecto_ruby_2023_production
+  username: postgres
+  password: <%= ENV['DATABASE_PASSWORD'] %>  # Usa variables de entorno en producción

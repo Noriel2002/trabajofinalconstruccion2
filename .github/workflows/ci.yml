@@ -16,8 +16,8 @@ jobs:
         image: postgres:latest
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: test_db
+          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+          POSTGRES_DB: proyecto_ruby_2023_test
         ports:
           - 5432:5432
         options: >-
@@ -37,6 +37,8 @@ jobs:
           bundler-cache: true
 
       - name: 🔧 Configurar base de datos
+        env:
+          DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         run: |
           cp config/database.yml.github config/database.yml
           bin/rails db:create db:schema:load --trace
