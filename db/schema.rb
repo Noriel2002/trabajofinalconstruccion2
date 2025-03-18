@@ -1,9 +1,24 @@
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
 ActiveRecord::Schema[7.1].define(version: 2024_02_08_204631) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "accesses", force: :cascade do |t|
     t.string "ip_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "link_id", null: false
+    t.bigint "link_id", null: false
     t.index ["link_id"], name: "index_accesses_on_link_id"
   end
 
@@ -13,13 +28,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_204631) do
     t.string "url"
     t.string "url_short"
     t.string "link_type"
-    t.integer "user_id"
-    t.string "password" # link privado
-    t.datetime "expiration_date" # link temporal
+    t.bigint "user_id"
+    t.string "password"
+    t.datetime "expiration_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "used" # link efimero
-    t.boolean "access_attempted" # link privado
+    t.boolean "used"
+    t.boolean "access_attempted"
     t.index ["slug"], name: "index_links_on_slug", unique: true
     t.index ["user_id"], name: "index_links_on_user_id"
   end
@@ -38,7 +53,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_08_204631) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  #Las claves foráneas son restricciones que aseguran la integridad referencial entre dos tablas en una base de datos relacional.
   add_foreign_key "accesses", "links"
   add_foreign_key "links", "users"
 end

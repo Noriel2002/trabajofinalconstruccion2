@@ -9,7 +9,7 @@ gem "rails", "~> 7.1.2"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+gem "pg"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
@@ -51,6 +51,9 @@ gem 'jquery-rails'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
+  gem "rspec-rails"
+  gem "factory_bot_rails" # Para crear datos de prueba fácilmente
+  gem "database_cleaner-active_record" # Limpia la BD entre pruebas
 end
 
 group :development do
@@ -68,5 +71,7 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'database_cleaner-active_record'
 
 end
+
