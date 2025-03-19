@@ -45,7 +45,7 @@ jobs:
   test_integracion:
     name: Ejecutar pruebas de integración
     runs-on: ubuntu-latest
-    needs: setup_postgres  # Corre después de `setup_postgres`
+    needs: setup_postgres  # Se ejecuta después de setup_postgres
 
     steps:
       - name: 📥 Clonar repositorio
@@ -68,22 +68,11 @@ jobs:
   test_sistema_authentication:
     name: Ejecutar pruebas - Authentication
     runs-on: ubuntu-latest
-    needs: setup_postgres  # Corre después de `setup_postgres`, paralelo con los demás `test_sistema`
+    needs: test_integracion  # Se ejecuta después de test_integracion
 
     steps:
       - name: 📥 Clonar repositorio
         uses: actions/checkout@v3
-
-      - name: 🛠️ Configurar Ruby y Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.0.2
-          bundler-cache: true
-
-      - name: 🔧 Configurar base de datos
-        run: |
-          cp config/database.yml.github config/database.yml
-          bin/rails db:create db:schema:load --trace
 
       - name: 🚀 Ejecutar pruebas Authentication
         run: bundle exec rspec spec/system/authentication
@@ -91,22 +80,11 @@ jobs:
   test_sistema_forms:
     name: Ejecutar pruebas - Forms
     runs-on: ubuntu-latest
-    needs: setup_postgres  # Corre después de `setup_postgres`, paralelo con los demás `test_sistema`
+    needs: test_sistema_authentication  # Se ejecuta después de test_sistema_authentication
 
     steps:
       - name: 📥 Clonar repositorio
         uses: actions/checkout@v3
-
-      - name: 🛠️ Configurar Ruby y Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.0.2
-          bundler-cache: true
-
-      - name: 🔧 Configurar base de datos
-        run: |
-          cp config/database.yml.github config/database.yml
-          bin/rails db:create db:schema:load --trace
 
       - name: 🚀 Ejecutar pruebas Forms
         run: bundle exec rspec spec/system/forms
@@ -114,22 +92,11 @@ jobs:
   test_sistema_user_registration:
     name: Ejecutar pruebas - User Registration
     runs-on: ubuntu-latest
-    needs: setup_postgres  # Corre después de `setup_postgres`, paralelo con los demás `test_sistema`
+    needs: test_sistema_forms  # Se ejecuta después de test_sistema_forms
 
     steps:
       - name: 📥 Clonar repositorio
         uses: actions/checkout@v3
-
-      - name: 🛠️ Configurar Ruby y Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.0.2
-          bundler-cache: true
-
-      - name: 🔧 Configurar base de datos
-        run: |
-          cp config/database.yml.github config/database.yml
-          bin/rails db:create db:schema:load --trace
 
       - name: 🚀 Ejecutar pruebas User Registration
         run: bundle exec rspec spec/system/user_registration
@@ -137,22 +104,11 @@ jobs:
   test_sistema_navigation:
     name: Ejecutar pruebas - Navigation & Authorization
     runs-on: ubuntu-latest
-    needs: setup_postgres  # Corre después de `setup_postgres`, paralelo con los demás `test_sistema`
+    needs: test_sistema_user_registration  # Se ejecuta después de test_sistema_user_registration
 
     steps:
       - name: 📥 Clonar repositorio
         uses: actions/checkout@v3
-
-      - name: 🛠️ Configurar Ruby y Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.0.2
-          bundler-cache: true
-
-      - name: 🔧 Configurar base de datos
-        run: |
-          cp config/database.yml.github config/database.yml
-          bin/rails db:create db:schema:load --trace
 
       - name: 🚀 Ejecutar pruebas Navigation & Authorization
         run: bundle exec rspec spec/system/navigation_and_authorization
